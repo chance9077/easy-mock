@@ -1,0 +1,64 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#container {
+  height: 100%;
+  background-color: white;
+}
+
+#root {
+  .MuiAppBar-root {
+    box-shadow: 0px 0px 6px 0px rgba(171, 170, 170, 70%);
+  }
+  .MuiToolbar {
+    &-root {
+      min-height: unset;
+      padding: 0;
+      .Control {
+        margin-left: auto;
+        margin-right: 20px;
+        button + button {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+  .MuiTabs {
+    &-root {
+      min-height: 30px;
+    }
+    &-indicator {
+      background-color: #1A73E8;
+    }
+  }
+  .MuiTab-root {
+    min-height: 30px;
+    min-width: 72px;
+  }
+  .tabs-panel {
+    height: calc(100vh - 35px);
+    overflow: auto;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+  }
+  .list-cell {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: keep-all;
+    &.name {
+      min-width: 120px;
+      max-width: 15vw;
+    }
+    &.url {
+      max-width: 45vw;
+    }
+    &.status {
+      max-width: 120px;
+      min-width: 120px;
+    }
+  }
+}
