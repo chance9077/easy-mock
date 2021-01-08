@@ -1,32 +1,42 @@
-import React, { FC, useState, ReactNode } from 'react'
-import { IconButton } from '@material-ui/core'
+import React, { FC, useState } from 'react'
+import { IconButton, Tooltip } from '@material-ui/core'
 import { NotInterested, Refresh, Lens } from '@material-ui/icons'
+import { RecordAction } from '@frontend/hooks/records'
+import { toggleRecording } from '@frontend/shared/network'
 
 interface ControlProps {
-  children?: ReactNode
-  isListen: boolean
-  toggleListen: () => void
+  clickHandler: (action: RecordAction) => void
 }
 
 const c: FC<ControlProps> = (props: ControlProps) => {
+  const [recording, setRecording] = useState(true)
+
   return (
     <div className="Control">
-      <IconButton
-        size="small"
-        title="Clear">
-          <NotInterested fontSize="small"/>
-      </IconButton>
-      <IconButton
-        size="small"
-        onClick={ () => props.toggleListen() }
-        title={ `${props.isListen ? 'Stop recording' : 'Recording'} network log` }>
-          <Lens fontSize="small" color={ props.isListen ? 'secondary' : 'action' }/>
-      </IconButton>
-      <IconButton
-        size="small"
-        title="Refresh">
-          <Refresh fontSize="small"/>
-      </IconButton>
+      <Tooltip title="Clear">
+        <IconButton
+          size="small"
+          onClick={ () => props.clickHandler({ type: 'CLEAR'}) }>
+            <NotInterested fontSize="small"/>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title={ `${ recording ? 'Stop recording' : 'Recording' } network log` }>
+        <IconButton
+          size="small"
+          onClick={ () => {
+            toggleRecording(!recording)
+            setRecording(!recording)
+          } }>
+            <Lens fontSize="small" color={ recording ? 'secondary' : 'action' }/>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Refresh">
+        <IconButton
+          size="small"
+          onClick={ () => props.clickHandler({ type: 'Refresh'}) }>
+            <Refresh fontSize="small"/>
+        </IconButton>
+      </Tooltip>
     </div>
   )
 }

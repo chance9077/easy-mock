@@ -58,7 +58,55 @@ html, body {
     }
     &.status {
       max-width: 120px;
-      min-width: 120px;
+      // min-width: 120px;
     }
+    &.action {
+      width: 0;
+      padding: 0;
+      position: relative;
+      overflow: visible;
+    }
+  }
+  .MuiTable-root {
+    min-width: 1300px;
+    tr:hover {
+      background-color: rgb(243, 243, 243);
+      .RequestAction {
+        display: block;
+        animation: scaleIn .5s;
+      }
+    }
+    th.name {
+      padding-left: 22px;
+    }
+    th.action {
+      width: 0;
+      padding: 0;
+    }
+  }
+  .RequestAction {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    background-color: rgb(243, 243, 243);
+    button {
+      color: #1A73E8;
+      margin-left: 5px;
+    }
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

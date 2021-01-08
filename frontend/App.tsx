@@ -1,13 +1,15 @@
 
 import React, { FC, Fragment, ChangeEvent, useState } from 'react'
 import { AppBar, Tabs, Tab, Toolbar } from '@material-ui/core'
+import TabsPanels from './components/TabsPanels'
 import RequestList from './components/RequestList'
 import Control from './components/Control'
+import { useRecords } from './hooks/records'
 import './app.scss'
 
 const App: FC = () => {
   const [tabValue, setTabValue] = useState(0)
-  const [isListen, setListen] = useState(true)
+  const { records, dispatch } = useRecords()
   const tabChange = (event: ChangeEvent<{}>, newValue: number) => setTabValue(newValue)
   
   return (
@@ -18,13 +20,13 @@ const App: FC = () => {
             <Tab label="请求" />
             <Tab label="Mock配置" />
           </Tabs>
-          <Control isListen={ isListen } toggleListen={ () => setListen(!isListen) }/>
+          <Control clickHandler={ dispatch } />
         </Toolbar>
       </AppBar>
-      <div className="tabs-panel">
-        <RequestList isListen={ isListen } style={{ display: tabValue === 0 ? '' : 'none' }}/>
-        <div style={{ display: tabValue === 1 ? '' : 'none' }}></div>
-      </div>
+      <TabsPanels value={ tabValue }>
+        <RequestList value={ records } />
+        <div>123</div>
+      </TabsPanels>
     </Fragment>
   )
 }
